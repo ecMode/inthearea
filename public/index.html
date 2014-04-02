@@ -118,7 +118,7 @@
             alert('No location specified.')
         }
         var splitLocations = location.split(/[ ,]+/);
-        var infoQuery = 'SELECT name, uid, current_location.name ' + 
+        var infoQuery = 'SELECT name, uid, current_location.name, profile_url ' + 
                         'FROM user ' +
                         'WHERE uid in (SELECT uid2 FROM friend WHERE uid1 = me()) ';
 
@@ -175,7 +175,6 @@
             grid.updateTiles(Helper.getValues(infoMap));
             grid.redraw(false);
             Helper.debouncedResize();
-            //setTimeout(Helper.debouncedResize, 500);//test retiling
         });
     }
 
