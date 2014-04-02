@@ -113,6 +113,7 @@ function debounce(a,b,c){var d;return function(){var e=this,f=arguments;clearTim
     }
  
     function getUserInfo() {
+        $('#friend-tiles').html('');
         var location = $('#location-input').val();
         if (!location){
             alert('No location specified.')
