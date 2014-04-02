@@ -20,7 +20,6 @@ function debounce(a,b,c){var d;return function(){var e=this,f=arguments;clearTim
         grid = new Tiles.Grid(el);
 
         grid.createTile = function(data) {
-            //var tile = new Tiles.Tile(data.uid); //needs a unique id
             var tileDiv = '<div>';
             tileDiv += '<div id="' + data.uid + '" class="viewport">';
             tileDiv += '<br><img class="clipped" src="' + data.pic + '">';
@@ -32,7 +31,6 @@ function debounce(a,b,c){var d;return function(){var e=this,f=arguments;clearTim
             tileDiv += '</div>'; 
             tileDiv += '</div>';
             var tile = new Tiles.Tile(data.uid, tileDiv); //needs a unique id
-            //tile.$el.append(tileDiv);
             return tile;
         };
 
@@ -175,6 +173,7 @@ function debounce(a,b,c){var d;return function(){var e=this,f=arguments;clearTim
 
             grid.updateTiles(Helper.getValues(infoMap));
             grid.redraw(false);
+            setTimeout(debouncedResize, 500);//test retiling
         });
     }
 
