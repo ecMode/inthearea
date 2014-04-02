@@ -174,7 +174,8 @@
 
             grid.updateTiles(Helper.getValues(infoMap));
             grid.redraw(false);
-            setTimeout(Helper.debouncedResize, 500);//test retiling
+            Helper.debouncedResize();
+            //setTimeout(Helper.debouncedResize, 500);//test retiling
         });
     }
 
