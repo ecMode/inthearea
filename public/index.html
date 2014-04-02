@@ -154,9 +154,13 @@ function debounce(a,b,c){var d;return function(){var e=this,f=arguments;clearTim
 
     function getUserPicFB(infoMap){
         var tile = '';
+        var width = height = 200;
+        if (navigator.platform.match('Mac')){ //idk look at fb api TODO:
+            width = height = 100;
+        }
         var picQuery = 'SELECT id, url ' +
                       'FROM profile_pic ' +
-                      'WHERE id in (' + Object.keys(infoMap).toString() + ') AND width=100 AND height=100';
+                      'WHERE id in (' + Object.keys(infoMap).toString() + ') AND width=' + width + ' AND height=' + height;
 
         FB.api('fql', {
             q: picQuery
