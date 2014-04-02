@@ -12,9 +12,37 @@
 <body>
     <div id="fb-root"></div>
 <script>
-function debounce(a,b,c){var d;return function(){var e=this,f=arguments;clearTimeout(d),d=setTimeout(function(){d=null,c||a.apply(e,f)},b),c&&!d&&a.apply(e,f)}}
     var el,
         grid;
+
+    var Helper = (function (){
+        var debounce = function (a,b,c){var d;return function(){var e=this,f=arguments;clearTimeout(d),d=setTimeout(function(){d=null,c||a.apply(e,f)},b),c&&!d&&a.apply(e,f)}};
+        this.urlMap = {};
+
+        this.setMapping = function (key, value){
+            this.urlMap[key] = value;
+        };
+
+        this.getMapping = function (key){
+            return this.urlMap[key];
+        };
+
+        this.getValues = function (jsonObject){
+            var arr = [];
+            for (var i in jsonObject){
+                arr.push(jsonObject[i]);
+            }
+            return arr;
+        }
+
+        this.debouncedResize = debounce(function() {
+            grid.resize();
+            grid.redraw(true);
+        }, 200);
+
+        return this;
+    })();
+
     $(document).ready(function(){
         el = $('#friend-tiles');
         grid = new Tiles.Grid(el);
@@ -36,13 +64,8 @@ function debounce(a,b,c){var d;return function(){var e=this,f=arguments;clearTim
 
         grid.cellSizeMin = grid.cellSize = 230;
 
-        var debouncedResize = debounce(function() {
-            grid.resize();
-            grid.redraw(true);
-        }, 200);
-
         // when the window resizes, redraw the grid
-        $(window).resize(debouncedResize);
+        $(window).resize(Helper.debouncedResize);
 
         $('#location-button').click(function (e){
           queryHandler(true);
@@ -51,28 +74,6 @@ function debounce(a,b,c){var d;return function(){var e=this,f=arguments;clearTim
           queryHandler(e);
         });
     });
-
-    var Helper = (function (){
-        this.urlMap = {};
-
-        this.setMapping = function (key, value){
-            this.urlMap[key] = value;
-        };
-
-        this.getMapping = function (key){
-            return this.urlMap[key];
-        };
-
-        this.getValues = function (jsonObject){
-            var arr = [];
-            for (var i in jsonObject){
-                arr.push(jsonObject[i]);
-            }
-            return arr;
-        }
-
-        return this;
-    })();
 
 
     var isLoggedIn = false;
@@ -173,7 +174,7 @@ function debounce(a,b,c){var d;return function(){var e=this,f=arguments;clearTim
 
             grid.updateTiles(Helper.getValues(infoMap));
             grid.redraw(false);
-            setTimeout(debouncedResize, 500);//test retiling
+            setTimeout(Helper.debouncedResize, 500);//test retiling
         });
     }
 
