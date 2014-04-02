@@ -1,0 +1,21 @@
+{
+  "name": "server",
+  "version": "0.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ecMode/song-wall.git"
+  },
+  "dependencies": {
+    "socket.io": ">=0.9.16",
+    "express": ">=3.0",
+    "io": ">=0.1.6",
+    "request": ">=2.0.0"
+  },
+  "author": "Eric Chen",
+  "license": "ISC"
+}
