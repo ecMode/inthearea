@@ -7,11 +7,11 @@ var http = require('http'),
     server = http.createServer(app); // better instead
 
 app.get('/', function(req, res) {
-    res.sendfile(path.resolve('../public/index.html'));
+    res.sendfile(path.resolve(__dirname + '/../public/index.html'));
 });
 
 app.get('/privacy', function(req, res) {
-    res.sendfile(path.resolve('../public/privacy.html'));
+    res.sendfile(path.resolve(__dirname + '/../public/privacy.html'));
 });
 
 app.configure(function(){
