@@ -2,15 +2,16 @@ var http = require('http'),
 	io = require('socket.io'),
 	express = require('express'),
 	request = require('request'),
+	path = require('path'),
 	app = express(),
     server = http.createServer(app); // better instead
 
 app.get('/', function(req, res) {
-    res.sendfile(__dirname + '/../public/index.html');
+    res.sendfile(path.resolve('../public/index.html');
 });
 
 app.get('/privacy', function(req, res) {
-    res.sendfile(__dirname + '/../public/privacy.html');
+    res.sendfile(path.resolve('../public/privacy.html');
 });
 
 app.configure(function(){
